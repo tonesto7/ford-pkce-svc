@@ -8,11 +8,15 @@ const pkceChallenge = require("pkce-challenge").default;
 function startServer() {
     app.use(express.json());
     // app.use("/", express.static(path.join(__dirname, "../../", "public")));
+    app.get("/", (req, res) => {
+        res.type("application/json").send(JSON.stringify({ version: appVer }));
+    });
+
     app.get("/getChallenge", (req, res) => {
         const c = pkceChallenge();
         res.type("application/json").send(JSON.stringify(c));
     });
-    const PORT = 3000; //process.env.ON_HEROKU ? process.env.PORT : process.env.HEROKU_MAC !== undefined ? 3000 : process.env.PORT || 3001;
+    const PORT = process.env.PORT ? process.env.PORT : 3000;
     app.listen(PORT, () => {
         console.log(`** API (v${appVer}) is Running at (IP: ${getIPAddress()} | Port: ${PORT}) | ProcessId: ${process.pid} **`);
     });
