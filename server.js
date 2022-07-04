@@ -1,4 +1,4 @@
-const appVer = require("./package.json");
+const appVer = require("./package.json").version;
 const express = require("express");
 const os = require("os");
 const app = express();
@@ -12,7 +12,7 @@ function startServer() {
         res.type("application/json").send(JSON.stringify({ version: appVer }));
     });
 
-    app.get("/getChallenge", (req, res) => {
+    app.post("/getChallenge", (req, res) => {
         const c = pkceChallenge();
         res.type("application/json").send(JSON.stringify(c));
     });
