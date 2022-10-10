@@ -3,7 +3,6 @@ const express = require("express");
 const os = require("os");
 const app = express();
 const path = require("path");
-const pkce = require("pkce").default;
 const pkceChallenge = require("pkce-challenge").default;
 
 function startServer() {
