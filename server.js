@@ -3,6 +3,7 @@ const express = require("express");
 const os = require("os");
 const app = express();
 const path = require("path");
+const pkce = require("pkce").default;
 const pkceChallenge = require("pkce-challenge").default;
 
 function startServer() {
@@ -16,10 +17,34 @@ function startServer() {
         const c = pkceChallenge();
         res.type("application/json").send(JSON.stringify(c));
     });
-    const PORT = process.env.PORT ? process.env.PORT : 3000;
+
+    app.get("/getChallenge", (req, res) => {
+        let c = createPkceChallenge();
+        res.type("application/json").send(JSON.stringify(c));
+    });
+
+    const PORT = process.env.PORT ? process.env.PORT : 3001;
     app.listen(PORT, () => {
         console.log(`** API (v${appVer}) is Running at (IP: ${getIPAddress()} | Port: ${PORT}) | ProcessId: ${process.pid} **`);
     });
+}
+
+function testAlphaNumeric(input_string) {
+    if (input_string.match(/^[0-9a-z]+$/gi)) {
+        console.log("Alpha Numeric", input_string);
+        return true;
+    } else {
+        console.log("Not Alpha Numeric", input_string);
+        return false;
+    }
+}
+
+function createPkceChallenge() {
+    const c = pkceChallenge();
+    if (!testAlphaNumeric(c.code_verifier) || !testAlphaNumeric(c.code_challenge)) {
+        return createPkceChallenge();
+    }
+    return c;
 }
 
 function getIPAddress() {
