@@ -30,10 +30,10 @@ function startServer() {
 
 function testAlphaNumeric(input_string) {
     if (input_string.match(/^[0-9a-z]+$/gi)) {
-        console.log("Alpha Numeric", input_string);
+        // console.log("Alpha Numeric", input_string);
         return true;
     } else {
-        console.log("Not Alpha Numeric", input_string);
+        // console.log("Not Alpha Numeric", input_string);
         return false;
     }
 }
