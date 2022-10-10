@@ -14,14 +14,14 @@ function startServer() {
     });
 
     app.post("/getChallenge", (req, res) => {
-        const c = pkceChallenge();
+        const c = createPkceChallenge();
         res.type("application/json").send(JSON.stringify(c));
     });
 
-    app.get("/getChallenge", (req, res) => {
-        let c = createPkceChallenge();
-        res.type("application/json").send(JSON.stringify(c));
-    });
+    // app.get("/getChallenge", (req, res) => {
+    //     let c = createPkceChallenge();
+    //     res.type("application/json").send(JSON.stringify(c));
+    // });
 
     const PORT = process.env.PORT ? process.env.PORT : 3001;
     app.listen(PORT, () => {
