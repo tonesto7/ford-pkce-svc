@@ -40,9 +40,9 @@ function testAlphaNumeric(input_string) {
 
 function createPkceChallenge() {
     const c = pkceChallenge();
-    if (!testAlphaNumeric(c.code_verifier) || !testAlphaNumeric(c.code_challenge)) {
-        return createPkceChallenge();
-    }
+    // if (!testAlphaNumeric(c.code_verifier) || !testAlphaNumeric(c.code_challenge)) {
+    //     return createPkceChallenge();
+    // }
     return c;
 }
 
