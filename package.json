@@ -15,7 +15,7 @@
     },
     "scripts": {
         "start-dev": "nodemon",
-        "set-remote": "heroku git:remote -a fpw-pkce-svc",
+        "set-remote": "heroku git:remote -a fpw-pkce-svc-2",
         "publish": "git push heroku master",
         "publish-force": "git push heroku master --force"
     }
